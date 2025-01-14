@@ -1,0 +1,10 @@
+.DS_Store
+hexo-theme-butterfly/
+*.log
+node_modules/
+2025/
+github/
+Thunbs.db
+db.json
+public/
+.deploy*/
