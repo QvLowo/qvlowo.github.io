@@ -1,0 +1,38 @@
+name: deploy-blog-test
+run-name: ${{ github.actor }} 
+on:
+  push:
+    branchs:
+    - main
+      
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+    # 檢查分支及themes等
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+        submodules: true
+
+      # 設定時區
+     - name: Set Timezone in Asia/Taipei
+      run: sudo timedatectl set-timezone 'Asia/Taipei'
+
+      # 安裝node 可用node -v 查詢local版本
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 23.5.0
+
+    # 安裝依賴，如果cache沒有才安裝
+    - name: Install dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: npm install
+
+    # hexo deploy
+    - name: deploy blog
+      run: hexo clean
+      uses: sma11black/hexo-action@v1.0.4
+      with:
+      deploy_key: ${{ secrets.DEPLOY_PRIVATEKEY }}  
