@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>如何使用Hexo和github action打造自己的blog(一) | QuL's Technical Blog</title><meta name="author" content="QuL"><meta name="copyright" content="QuL"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="這是一份紀錄從零開始搭建hexo blog的教學筆記不用手刻前端，可以無腦搭建blog根本是對我這種前端苦手的友好幫手_(:3 」∠ )_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何使用Hexo和github action打造自己的blog(一)">
+<meta property="og:url" content="https://qvlowo.github.io/2025/01/16/%E3%80%90%E6%95%99%E5%AD%B8%E3%80%91%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Hexo%E5%92%8Cgithub%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84blog/index.html">
+<meta property="og:site_name" content="QuL&#39;s Technical Blog">
+<meta property="og:description" content="這是一份紀錄從零開始搭建hexo blog的教學筆記不用手刻前端，可以無腦搭建blog根本是對我這種前端苦手的友好幫手_(:3 」∠ )_">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://qvlowo.github.io/img/author.png">
+<meta property="article:published_time" content="2025-01-16T12:54:55.000Z">
+<meta property="article:modified_time" content="2025-01-17T14:46:57.656Z">
+<meta property="article:author" content="QuL">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="HomeBrew">
+<meta property="article:tag" content="MAC">
+<meta property="article:tag" content="Node.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qvlowo.github.io/img/author.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "如何使用Hexo和github action打造自己的blog(一)",
+  "url": "https://qvlowo.github.io/2025/01/16/%E3%80%90%E6%95%99%E5%AD%B8%E3%80%91%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Hexo%E5%92%8Cgithub%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84blog/",
+  "image": "https://qvlowo.github.io/img/author.png",
+  "datePublished": "2025-01-16T12:54:55.000Z",
+  "dateModified": "2025-01-17T14:46:57.656Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "QuL",
+      "url": "https://qvlowo.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://qvlowo.github.io/2025/01/16/%E3%80%90%E6%95%99%E5%AD%B8%E3%80%91%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Hexo%E5%92%8Cgithub%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84blog/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '複製成功',
+    error: '複製失敗',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '如何使用Hexo和github action打造自己的blog(一)',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background: linear-gradient(to top, rgb(5, 20, 40), rgb(15, 50, 70), rgb(40, 100, 90), rgb(10, 5, 20));;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/author.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> Categories</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/java/"><span> Java</span></a></li><li><a class="site-page child" href="/categories/tutorial/"><span> Tutorial</span></a></li><li><a class="site-page child" href="/categories/debugging-journal/"><span> Debugging Journal</span></a></li><li><a class="site-page child" href="/categories/leetcode/"><span> Leetcode</span></a></li><li><a class="site-page child" href="/categories/OS-command/"><span> Command</span></a></li><li><a class="site-page child" href="/categories/journal/"><span> Journal</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/img/background.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">QuL's Technical Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">如何使用Hexo和github action打造自己的blog(一)</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> Categories</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/java/"><span> Java</span></a></li><li><a class="site-page child" href="/categories/tutorial/"><span> Tutorial</span></a></li><li><a class="site-page child" href="/categories/debugging-journal/"><span> Debugging Journal</span></a></li><li><a class="site-page child" href="/categories/leetcode/"><span> Leetcode</span></a></li><li><a class="site-page child" href="/categories/OS-command/"><span> Command</span></a></li><li><a class="site-page child" href="/categories/journal/"><span> Journal</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">如何使用Hexo和github action打造自己的blog(一)<a class="post-edit-link" href="https://github.com/QvLowo/qvlowo.github.io/edit/main/source/_posts/【教學】如何使用Hexo和github打造自己的blog.md" title="編輯" target="_blank"><i class="fas fa-pencil-alt"></i></a></h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2025-01-16T12:54:55.000Z" title="發表於 2025-01-16 20:54:55">2025-01-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2025-01-17T14:46:57.656Z" title="更新於 2025-01-17 22:46:57">2025-01-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Tutorial/">Tutorial</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">瀏覽量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>首先這篇會來談架設blog需要先下載的東西</p>
+<p><strong>建立環境為 MAC，所以會以MAC教學為主</strong></p>
+<hr>
+<h1 id="搭建blog前的準備"><a href="#搭建blog前的準備" class="headerlink" title="搭建blog前的準備"></a>搭建blog前的準備</h1><p>MAC有一個方便的套件管理工具叫做 HomeBrew<br>可以簡單安裝各種套件<br>不用再去網頁點下載慢慢用一個圖型介面拉檔案過去資料夾</p>
+<p>用過之後就回不去了(?)</p>
+<hr>
+<h2 id="第一步：安裝HomeBrew"><a href="#第一步：安裝HomeBrew" class="headerlink" title="第一步：安裝HomeBrew"></a>第一步：安裝HomeBrew</h2><p>先在MAC找到終端機</p>
+<p><img src="/img/post_img/shell.png" alt="終端機"></p>
+<p>輸入HomeBrew 安裝指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;</span><br></pre></td></tr></table></figure>
+
+<p>以下網址可以查詢各種套件的安裝指令(如:docker、node.js等等)</p>
+<p><a target="_blank" rel="noopener" href="https://formulae.brew.sh/">HomeBrew Formulae-查詢套件網址</a></p>
+<hr>
+<blockquote>
+<p>關於HomeBrew想了解更多?</p>
+</blockquote>
+<p><em>延伸閱讀</em><br>[深入剖析homebrew]待更新…</p>
+<hr>
+<h2 id="第二步：安裝node-js"><a href="#第二步：安裝node-js" class="headerlink" title="第二步：安裝node.js"></a>第二步：安裝node.js</h2><p>安裝套件的指令可以透過上面提到的HomeBrew Formulae查詢<br>我們這邊一樣使用終端機輸入指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install node</span><br></pre></td></tr></table></figure>
+<p>就安裝好node.js套件了</p>
+<hr>
+<h2 id="第三步：安裝Hexo"><a href="#第三步：安裝Hexo" class="headerlink" title="第三步：安裝Hexo"></a>第三步：安裝Hexo</h2><p>因為剛剛安裝node.js的時候就會一起安裝npm<br>這邊可以使用hexo官方的安裝指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+
+<p>或是homebrew的安裝指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install hexo</span><br></pre></td></tr></table></figure>
+<p>兩者擇一</p>
+<hr>
+<p>那麼安裝到這邊的準備工作就完成了!<br>下一篇會介紹要如何使用Hexo搭建blog ٩(๑•̀ω•́๑)۶</p>
+<div id="post-outdate-notice" data="{&quot;limitDay&quot;:365,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2025-01-17 22:46:57&quot;}" hidden></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://qvlowo.github.io/">QuL</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="https://qvlowo.github.io/2025/01/16/%E3%80%90%E6%95%99%E5%AD%B8%E3%80%91%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Hexo%E5%92%8Cgithub%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84blog/">https://qvlowo.github.io/2025/01/16/%E3%80%90%E6%95%99%E5%AD%B8%E3%80%91%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Hexo%E5%92%8Cgithub%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84blog/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 授權協議。轉載請註明來源 <a href="https://qvlowo.github.io" target="_blank">QuL's Technical Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Hexo/">Hexo</a><a class="post-meta__tags" href="/tags/HomeBrew/">HomeBrew</a><a class="post-meta__tags" href="/tags/MAC/">MAC</a><a class="post-meta__tags" href="/tags/Node-js/">Node.js</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/01/13/%E9%97%9C%E6%96%BC%E6%88%91%E7%94%A8Hexo%E8%88%87Github-Action%E5%BB%BA%E7%AB%8Bblog%E7%9A%84%E8%B5%B7%E6%BA%90/" title="關於我用Hexo與Github Action建立blog的起源"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">關於我用Hexo與Github Action建立blog的起源</div></div><div class="info-2"><div class="info-item-1">前言當我轉職成為 Java 工程師，正式踏入職場後，很快意識到技能樹常常受到公司的限制。雖然在工作中有時在找資料的過程中能接觸到新技術，但我清楚地知道，若要保持競爭力，僅依賴公司內的工作是不夠的。下班後，我需要持續精進自己，深入學習像 Docker、Kubernetes、AWS 等技能。 特別是當我發現，儘管我是職場新人，但某些情境下反而比資深同事還了解某些關於程式上的知識時，隱隱出現了危機感。這種感受在前陣子參加 Yourator 數位職涯博覽會暨 AI 人才高峰會後變得特別真實。透過與多家徵求後端工程師的公司交流，這讓我深刻反思：作為非本科出身的工程師，我該如何向他人證明自己是一個持續學習、善於解決問題並符合公司需求的人？  如何提升自我形象？ Technical Blog  在了解到這個現實面之後，我爬文之後發現很多人會去經營blog，所以在查了資料後發現有Hexo 與Github...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相關推薦</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/01/13/%E9%97%9C%E6%96%BC%E6%88%91%E7%94%A8Hexo%E8%88%87Github-Action%E5%BB%BA%E7%AB%8Bblog%E7%9A%84%E8%B5%B7%E6%BA%90/" title="關於我用Hexo與Github Action建立blog的起源"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-13</div><div class="info-item-2">關於我用Hexo與Github Action建立blog的起源</div></div><div class="info-2"><div class="info-item-1">前言當我轉職成為 Java 工程師，正式踏入職場後，很快意識到技能樹常常受到公司的限制。雖然在工作中有時在找資料的過程中能接觸到新技術，但我清楚地知道，若要保持競爭力，僅依賴公司內的工作是不夠的。下班後，我需要持續精進自己，深入學習像 Docker、Kubernetes、AWS 等技能。 特別是當我發現，儘管我是職場新人，但某些情境下反而比資深同事還了解某些關於程式上的知識時，隱隱出現了危機感。這種感受在前陣子參加 Yourator 數位職涯博覽會暨 AI 人才高峰會後變得特別真實。透過與多家徵求後端工程師的公司交流，這讓我深刻反思：作為非本科出身的工程師，我該如何向他人證明自己是一個持續學習、善於解決問題並符合公司需求的人？  如何提升自我形象？ Technical Blog  在了解到這個現實面之後，我爬文之後發現很多人會去經營blog，所以在查了資料後發現有Hexo 與Github...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/author.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">QuL</div><div class="author-info-description">一隻幽靈的技術筆記</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/QvLowo"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%90%AD%E5%BB%BAblog%E5%89%8D%E7%9A%84%E6%BA%96%E5%82%99"><span class="toc-number">2.</span> <span class="toc-text">搭建blog前的準備</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%AE%89%E8%A3%9DHomeBrew"><span class="toc-number">2.1.</span> <span class="toc-text">第一步：安裝HomeBrew</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%AE%89%E8%A3%9Dnode-js"><span class="toc-number">2.2.</span> <span class="toc-text">第二步：安裝node.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E5%AE%89%E8%A3%9DHexo"><span class="toc-number">2.3.</span> <span class="toc-text">第三步：安裝Hexo</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/16/%E3%80%90%E6%95%99%E5%AD%B8%E3%80%91%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Hexo%E5%92%8Cgithub%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84blog/" title="如何使用Hexo和github action打造自己的blog(一)">如何使用Hexo和github action打造自己的blog(一)</a><time datetime="2025-01-16T12:54:55.000Z" title="發表於 2025-01-16 20:54:55">2025-01-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/13/%E9%97%9C%E6%96%BC%E6%88%91%E7%94%A8Hexo%E8%88%87Github-Action%E5%BB%BA%E7%AB%8Bblog%E7%9A%84%E8%B5%B7%E6%BA%90/" title="關於我用Hexo與Github Action建立blog的起源">關於我用Hexo與Github Action建立blog的起源</a><time datetime="2025-01-13T05:14:54.000Z" title="發表於 2025-01-13 13:14:54">2025-01-13</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(to top,  rgba(5, 20, 40, 0.8), rgba(15, 50, 70, 0.6),rgba(10, 5, 20,0.2));;"><div id="footer-wrap"><div class="copyright">&copy;2025 By QuL</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日夜模式切換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到頂端"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="✧*｡٩(ˊᗜˋ*)و✧*｡,(´▽`ʃ♡ƪ)&quot;,٩(๑•̀ω•́๑)۶" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
