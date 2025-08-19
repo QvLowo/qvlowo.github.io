@@ -8,7 +8,7 @@
 <meta property="og:image" content="https://qvlowo.github.io/img/author.png">
 <meta property="article:author" content="QuL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://qvlowo.github.io/img/author.png"><link rel="shortcut icon" href="/img/logo.png"><link rel="canonical" href="https://qvlowo.github.io/404.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+<meta name="twitter:image" content="https://qvlowo.github.io/img/author.png"><link rel="shortcut icon" href="/img/logo.png"><link rel="canonical" href="https://qvlowo.github.io/404.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
     (() => {
       
     const saveToLocal = {
@@ -98,7 +98,14 @@
     detectApple()
   
     })()
-  </script><script>const GLOBAL_CONFIG = {
+  </script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-LCHP5WKXZR"></script><script>window.dataLayer = window.dataLayer || []
+function gtag(){dataLayer.push(arguments)}
+gtag('js', new Date())
+gtag('config', 'G-LCHP5WKXZR')
+btf.addGlobalFn('pjaxComplete', () => {
+  gtag('config', 'G-LCHP5WKXZR', {'page_path': window.location.pathname})
+}, 'google_analytics')
+</script><script>const GLOBAL_CONFIG = {
   root: '/',
   algolia: undefined,
   localSearch: undefined,
