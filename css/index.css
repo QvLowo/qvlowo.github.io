@@ -3669,7 +3669,7 @@ figure.highlight pre .javascript .function {
   width: 42px;
   height: 22px;
   border-radius: 34px;
-  background-color: #49b1f5;
+  background-color: #181818;
   vertical-align: middle;
   cursor: pointer;
   -webkit-transition: 0.4s;
@@ -3772,7 +3772,7 @@ figure.highlight pre .javascript .function {
 #page-header {
   position: relative;
   width: 100%;
-  background-color: #49b1f5;
+  background-color: #181818;
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
