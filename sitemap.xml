@@ -2,24 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://me.qulluq.com/about/index.html</loc>
-    
-    <lastmod>2025-09-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://me.qulluq.com/categories/index.html</loc>
-    
-    <lastmod>2025-09-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://me.qulluq.com/link/index.html</loc>
     
     <lastmod>2025-09-17</lastmod>
@@ -30,6 +12,51 @@
   
   <url>
     <loc>https://me.qulluq.com/tags/index.html</loc>
+    
+    <lastmod>2025-09-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.qulluq.com/post/5461d094bebd/</loc>
+    
+    <lastmod>2025-09-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.qulluq.com/post/dee4e1eee260/</loc>
+    
+    <lastmod>2025-09-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.qulluq.com/post/e3c0e0685e6c/</loc>
+    
+    <lastmod>2025-09-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.qulluq.com/about/index.html</loc>
+    
+    <lastmod>2025-09-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.qulluq.com/categories/index.html</loc>
     
     <lastmod>2025-09-17</lastmod>
     
@@ -74,7 +101,7 @@
   </url>
   
   <url>
-    <loc>https://me.qulluq.com/post/5461d094bebd/</loc>
+    <loc>https://me.qulluq.com/post/eee1de202425/</loc>
     
     <lastmod>2025-09-17</lastmod>
     
@@ -83,7 +110,7 @@
   </url>
   
   <url>
-    <loc>https://me.qulluq.com/post/dee4e1eee260/</loc>
+    <loc>https://me.qulluq.com/post/826808093630/</loc>
     
     <lastmod>2025-09-17</lastmod>
     
@@ -92,7 +119,7 @@
   </url>
   
   <url>
-    <loc>https://me.qulluq.com/post/e3c0e0685e6c/</loc>
+    <loc>https://me.qulluq.com/post/6caac3b113d3/</loc>
     
     <lastmod>2025-09-17</lastmod>
     
@@ -164,7 +191,7 @@
   </url>
   
   <url>
-    <loc>https://me.qulluq.com/post/35421dabf276/</loc>
+    <loc>https://me.qulluq.com/post/6da4243d000a/</loc>
     
     <lastmod>2025-09-17</lastmod>
     
@@ -173,7 +200,7 @@
   </url>
   
   <url>
-    <loc>https://me.qulluq.com/post/6da4243d000a/</loc>
+    <loc>https://me.qulluq.com/post/35421dabf276/</loc>
     
     <lastmod>2025-09-17</lastmod>
     
@@ -210,33 +237,6 @@
   
   <url>
     <loc>https://me.qulluq.com/post/6b18b4a6061c/</loc>
-    
-    <lastmod>2025-09-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://me.qulluq.com/post/eee1de202425/</loc>
-    
-    <lastmod>2025-09-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://me.qulluq.com/post/826808093630/</loc>
-    
-    <lastmod>2025-09-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://me.qulluq.com/post/6caac3b113d3/</loc>
     
     <lastmod>2025-09-17</lastmod>
     
