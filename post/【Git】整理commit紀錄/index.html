@@ -1,0 +1,236 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【Git】整理commit紀錄 | QuL's Technical Blog</title><meta name="author" content="QuL"><meta name="copyright" content="QuL"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="紀錄rebase整理commit紀錄的技巧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Git】整理commit紀錄">
+<meta property="og:url" content="https://me.qulluq.com/post/%E3%80%90Git%E3%80%91%E6%95%B4%E7%90%86commit%E7%B4%80%E9%8C%84/index.html">
+<meta property="og:site_name" content="QuL&#39;s Technical Blog">
+<meta property="og:description" content="紀錄rebase整理commit紀錄的技巧">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://me.qulluq.com/img/author.png">
+<meta property="article:published_time" content="2025-03-11T03:52:24.000Z">
+<meta property="article:modified_time" content="2025-09-18T01:14:34.790Z">
+<meta property="article:author" content="QuL">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://me.qulluq.com/img/author.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "【Git】整理commit紀錄",
+  "url": "https://me.qulluq.com/post/%E3%80%90Git%E3%80%91%E6%95%B4%E7%90%86commit%E7%B4%80%E9%8C%84/",
+  "image": "https://me.qulluq.com/img/author.png",
+  "datePublished": "2025-03-11T03:52:24.000Z",
+  "dateModified": "2025-09-18T01:14:34.790Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "QuL",
+      "url": "https://me.qulluq.com/about/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/logo.png"><link rel="canonical" href="https://me.qulluq.com/post/%E3%80%90Git%E3%80%91%E6%95%B4%E7%90%86commit%E7%B4%80%E9%8C%84/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9993516444363929"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-9993516444363929',
+  enable_page_level_ads: 'true'
+});</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-LCHP5WKXZR"></script><script>window.dataLayer = window.dataLayer || []
+function gtag(){dataLayer.push(arguments)}
+gtag('js', new Date())
+gtag('config', 'G-LCHP5WKXZR')
+btf.addGlobalFn('pjaxComplete', () => {
+  gtag('config', 'G-LCHP5WKXZR', {'page_path': window.location.pathname})
+}, 'google_analytics')
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '複製成功',
+    error: '複製失敗',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【Git】整理commit紀錄',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background: linear-gradient(to top, rgb(5, 20, 40), rgb(15, 50, 70), rgb(40, 100, 90), rgb(10, 5, 20));;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/author.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> categories</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/technical-notes/"><span> 技術筆記</span></a></li><li><a class="site-page child" href="/categories/development-practice/"><span> 開發實戰</span></a></li><li><a class="site-page child" href="/categories/learning-guides/"><span> 教學系列</span></a></li><li><a class="site-page child" href="/categories/qul-journal/"><span> QuL聊聊</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/img/background.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">QuL's Technical Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">【Git】整理commit紀錄</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首頁</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> categories</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/technical-notes/"><span> 技術筆記</span></a></li><li><a class="site-page child" href="/categories/development-practice/"><span> 開發實戰</span></a></li><li><a class="site-page child" href="/categories/learning-guides/"><span> 教學系列</span></a></li><li><a class="site-page child" href="/categories/qul-journal/"><span> QuL聊聊</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">【Git】整理commit紀錄</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2025-03-11T03:52:24.000Z" title="發表於 2025-03-11 11:52:24">2025-03-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2025-09-18T01:14:34.790Z" title="更新於 2025-09-18 09:14:34">2025-09-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/development-practice/">development-practice</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">總字數:</span><span class="word-count">665</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀時間:</span><span>2分鐘</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">瀏覽量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>開發中可能會有許多不必要的commit點，<br>當然在commit前就要先謹慎的commit，不要隨便commit，<br>這邊舉例來說，<br>在剛開始的時候都會忍不住改一個東西就commit一次，<br>像是 修改錯字之類的，這樣的commit就有點多餘。</p>
+<p><strong>使用rebase的情況是，commit點還沒push到origin的時候。</strong></p>
+<hr>
+<h1 id="使用rebase整理commit紀錄"><a href="#使用rebase整理commit紀錄" class="headerlink" title="使用rebase整理commit紀錄"></a>使用rebase整理commit紀錄</h1><p>今天可能會有個commit紀錄像這樣</p>
+<p><strong>情境舉例示範</strong><br>假設分支名稱為 <code>test</code></p>
+<h2 id="情境一：-保留程式，但移除commit訊息。"><a href="#情境一：-保留程式，但移除commit訊息。" class="headerlink" title="情境一： 保留程式，但移除commit訊息。"></a>情境一： 保留程式，但移除commit訊息。</h2><p>假設我們要保留 <code>修改錯字</code> 的程式，但不要commit紀錄</p>
+<h3 id="Step-1-查詢commit-log紀錄"><a href="#Step-1-查詢commit-log紀錄" class="headerlink" title="Step 1 : 查詢commit log紀錄"></a>Step 1 : 查詢commit log紀錄</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --oneline test</span><br></pre></td></tr></table></figure>
+
+<p>可能查出的結果如下：</p>
+<blockquote>
+<p>1addcb3 (HEAD -&gt; test) 新增功能<br>ada36ba 修改錯字<br>ffe3ke1 測試<br>gg34e67 測試還原程式<br>bb389s1 新增分類</p>
+</blockquote>
+<hr>
+<h3 id="Step-2-使用rebase"><a href="#Step-2-使用rebase" class="headerlink" title="Step 2 : 使用rebase"></a>Step 2 : 使用rebase</h3><p><code>先確保當前分支在 test</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i HEAD~2</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>HEAD~2 &#x3D; 取最新的前兩筆</p>
+</blockquote>
+<p>這時候會出現：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pick 1addcb3 新增功能</span><br><span class="line">pick ada36ba 修改錯字</span><br></pre></td></tr></table></figure>
+<p>先按下 <code>i</code> (terminal編輯鍵)<br>terminal最下面會顯示<code>-- INSERT --</code><br>代表可以輸入文字</p>
+<hr>
+<h3 id="Step-3-pick-改為-squash"><a href="#Step-3-pick-改為-squash" class="headerlink" title="Step 3 : pick 改為 squash"></a>Step 3 : pick 改為 squash</h3><p>將上面的內容改成：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pick 1addcb3 新增功能</span><br><span class="line">squash ada36ba 修改錯字</span><br></pre></td></tr></table></figure>
+
+<p>按下esc 代表退出編輯模式<br>再按鍵盤輸入 <code>:wq</code></p>
+<blockquote>
+<p>:wq(保存退出)</p>
+</blockquote>
+<p>接著會進入commit內容的編輯vim<br>一樣按 i 編輯後 &gt; esc 退出編輯模式 &gt; 輸入 :wq<br>這樣就完成修改commit紀錄了</p>
+<p>可以看到最後結果<br>修改錯字 的程式被合併到 新增功能 的commit點<br>但是修改錯字的commit點消失了</p>
+<hr>
+<h2 id="情境二：移除commit點，並移除程式"><a href="#情境二：移除commit點，並移除程式" class="headerlink" title="情境二：移除commit點，並移除程式"></a>情境二：移除commit點，並移除程式</h2><h3 id="Step-1-查詢git-log"><a href="#Step-1-查詢git-log" class="headerlink" title="Step 1 : 查詢git log"></a>Step 1 : 查詢git log</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --oneline test</span><br></pre></td></tr></table></figure>
+<p>一樣假設查出的樣子如下，我們要移除 <code>測試 &amp; 測試還原程式</code> 的commit點</p>
+<blockquote>
+<p>1addcb3 (HEAD -&gt; test) 新增功能<br>ada36ba 修改錯字<br>ffe3ke1 測試<br>gg34e67 測試還原程式<br>bb389s1 新增分類</p>
+</blockquote>
+<hr>
+<h3 id="Step-2-rebase"><a href="#Step-2-rebase" class="headerlink" title="Step 2 : rebase"></a>Step 2 : rebase</h3><p>取前四筆</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i HEAD~4</span><br></pre></td></tr></table></figure>
+<p>會出現：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pick 1addcb3 新增功能</span><br><span class="line">pick ada36ba 修改錯字</span><br><span class="line">pick ffe3ke1 測試</span><br><span class="line">pick gg34e67 測試還原程式</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="Step-3-pick改為drop"><a href="#Step-3-pick改為drop" class="headerlink" title="Step 3 : pick改為drop"></a>Step 3 : pick改為drop</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pick 1addcb3 新增功能</span><br><span class="line">pick ada36ba 修改錯字</span><br><span class="line">drop ffe3ke1 測試</span><br><span class="line">drop gg34e67 測試還原程式</span><br></pre></td></tr></table></figure>
+<p>terminal 編輯儲存的步驟可以複習情境一</p>
+<p>這樣 測試 與 測試還原程式，這兩個commit點+程式 就會消失了</p>
+<hr>
+<h1 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h1><p>重新複習一次<br>git rebase 的用法：</p>
+<ol>
+<li><p>不要commit訊息紀錄，但是 要保留 程式碼</p>
+<blockquote>
+<p>pick –改為–&gt; squash</p>
+</blockquote>
+</li>
+<li><p>不要commit訊息紀錄，也 不要保留 程式碼：</p>
+<blockquote>
+<p>pick –改為–&gt; drop</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>如果commit已經被推到origin，不建議使用drop，建議使用<code>revert</code>，以免影響其他人。</p>
+</blockquote>
+<div id="post-outdate-notice" data="{&quot;limitDay&quot;:365,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2025-09-18 09:14:34&quot;}" hidden></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://me.qulluq.com/about/">QuL</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="https://me.qulluq.com/post/%E3%80%90Git%E3%80%91%E6%95%B4%E7%90%86commit%E7%B4%80%E9%8C%84/">https://me.qulluq.com/post/%E3%80%90Git%E3%80%91%E6%95%B4%E7%90%86commit%E7%B4%80%E9%8C%84/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 授權協議。轉載請註明來源 <a href="https://me.qulluq.com" target="_blank">QuL's Technical Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Git/">Git</a></div><div class="post-share"><div class="social-share" data-image="/img/author.png" data-sites="facebook,twitter,linkedin"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related  no-desc" href="/post/%E3%80%90Git%E3%80%91%E5%AD%90%E5%88%86%E6%94%AF%E8%90%BD%E5%BE%8C%E4%B8%BB%E5%88%86%E6%94%AF%E7%9A%84%E8%A7%A3%E6%B1%BA%E6%96%B9%E5%BC%8F/" title="【Git】子分支落後主分支的解決方式"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">【Git】子分支落後主分支的解決方式</div></div></div></a><a class="pagination-related" href="/post/%E3%80%90Git%E3%80%91Cherry-Pick-%E5%8F%96%E5%BE%97%E6%9F%90%E5%80%8Bcommit/" title="【Git】Cherry-Pick 取得某個commit"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">【Git】Cherry-Pick 取得某個commit</div></div><div class="info-2"><div class="info-item-1">紀錄開發中遇到cherry-pick的使用經驗</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相關推薦</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/post/%E3%80%90Git%E3%80%91Cherry-Pick-%E5%8F%96%E5%BE%97%E6%9F%90%E5%80%8Bcommit/" title="【Git】Cherry-Pick 取得某個commit"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-11</div><div class="info-item-2">【Git】Cherry-Pick 取得某個commit</div></div><div class="info-2"><div class="info-item-1">紀錄開發中遇到cherry-pick的使用經驗</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/author.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">QuL</div><div class="author-info-description">一隻幽靈的技術筆記</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/QvLowo"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">第395天...</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8rebase%E6%95%B4%E7%90%86commit%E7%B4%80%E9%8C%84"><span class="toc-number">2.</span> <span class="toc-text">使用rebase整理commit紀錄</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%83%85%E5%A2%83%E4%B8%80%EF%BC%9A-%E4%BF%9D%E7%95%99%E7%A8%8B%E5%BC%8F%EF%BC%8C%E4%BD%86%E7%A7%BB%E9%99%A4commit%E8%A8%8A%E6%81%AF%E3%80%82"><span class="toc-number">2.1.</span> <span class="toc-text">情境一： 保留程式，但移除commit訊息。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-1-%E6%9F%A5%E8%A9%A2commit-log%E7%B4%80%E9%8C%84"><span class="toc-number">2.1.1.</span> <span class="toc-text">Step 1 : 查詢commit log紀錄</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-2-%E4%BD%BF%E7%94%A8rebase"><span class="toc-number">2.1.2.</span> <span class="toc-text">Step 2 : 使用rebase</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-3-pick-%E6%94%B9%E7%82%BA-squash"><span class="toc-number">2.1.3.</span> <span class="toc-text">Step 3 : pick 改為 squash</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%83%85%E5%A2%83%E4%BA%8C%EF%BC%9A%E7%A7%BB%E9%99%A4commit%E9%BB%9E%EF%BC%8C%E4%B8%A6%E7%A7%BB%E9%99%A4%E7%A8%8B%E5%BC%8F"><span class="toc-number">2.2.</span> <span class="toc-text">情境二：移除commit點，並移除程式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-1-%E6%9F%A5%E8%A9%A2git-log"><span class="toc-number">2.2.1.</span> <span class="toc-text">Step 1 : 查詢git log</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-2-rebase"><span class="toc-number">2.2.2.</span> <span class="toc-text">Step 2 : rebase</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-3-pick%E6%94%B9%E7%82%BAdrop"><span class="toc-number">2.2.3.</span> <span class="toc-text">Step 3 : pick改為drop</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B5%90%E8%AB%96"><span class="toc-number">3.</span> <span class="toc-text">結論</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/%E5%BC%B1%E6%8E%83%E4%BF%AE%E8%A3%9C%E5%AF%A6%E6%88%B0-%E4%B8%80%E6%AC%A1%E6%90%9E%E6%87%82SSL%E8%87%AA%E6%88%91%E7%B0%BD%E7%BD%B2%E6%86%91%E8%AD%89-SSL-Self-Signed-Certificate-%E7%9A%84%E5%AE%89%E5%85%A8%E9%A2%A8%E9%9A%AA%E8%88%87%E8%A7%A3%E6%B1%BA%E6%96%B9%E6%A1%88-1/" title="弱掃修補實戰:一次搞懂SSL自我簽署憑證(SSL Self-Signed Certificate)的安全風險與解決方案">弱掃修補實戰:一次搞懂SSL自我簽署憑證(SSL Self-Signed Certificate)的安全風險與解決方案</a><time datetime="2025-09-16T05:18:30.000Z" title="發表於 2025-09-16 13:18:30">2025-09-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/Hexo-Blog%E6%95%99%E5%AD%B8-%E5%9B%9B-%EF%BC%9AGitHub-Actions%E8%87%AA%E5%8B%95%E9%83%A8%E7%BD%B2%E6%95%99%E5%AD%B8%E5%BE%9E%E6%89%8B%E5%8B%95%E5%88%B0%E5%85%A8%E8%87%AA%E5%8B%95%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B/" title="Hexo Blog教學(四)：GitHub Actions自動部署教學從手動到全自動的完整流程">Hexo Blog教學(四)：GitHub Actions自動部署教學從手動到全自動的完整流程</a><time datetime="2025-09-04T08:56:25.000Z" title="發表於 2025-09-04 16:56:25">2025-09-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/Golang%E5%85%A5%E9%96%80%E6%95%99%E5%AD%B8-%E4%B8%80-%EF%BC%9A%E7%82%BA%E4%BB%80%E9%BA%BC%E8%A6%81%E5%AD%B8Go%EF%BC%9F%E5%BE%9EHello-World%E5%88%B0%E4%BD%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E5%80%8B%E5%8F%AF%E5%9F%B7%E8%A1%8C%E6%AA%94/" title="Golang入門教學(一)：為什麼要學Go？從Hello World到你的第一個可執行檔">Golang入門教學(一)：為什麼要學Go？從Hello World到你的第一個可執行檔</a><time datetime="2025-09-03T08:12:07.000Z" title="發表於 2025-09-03 16:12:07">2025-09-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/%E3%80%90%E8%B3%87%E5%AE%89%E3%80%91MITRE-ATT-CK-%E5%85%A5%E9%96%80%E6%8C%87%E5%8D%97%EF%BC%9A%E5%BE%9E%E3%80%8C%E7%97%9B%E8%8B%A6%E9%87%91%E5%AD%97%E5%A1%94%E3%80%8D%E7%90%86%E8%A7%A3-TTPs-%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/" title="【資安】MITRE ATT&amp;CK 入門指南：從「痛苦金字塔」理解 TTPs 核心概念">【資安】MITRE ATT&amp;CK 入門指南：從「痛苦金字塔」理解 TTPs 核心概念</a><time datetime="2025-08-21T03:28:21.000Z" title="發表於 2025-08-21 11:28:21">2025-08-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/%E5%BE%9E@Transactional%E7%9C%8B%E6%87%82ACID%EF%BC%9A%E6%89%93%E9%80%A0%E5%8F%AF%E9%9D%A0%E7%9A%84%E4%BA%A4%E6%98%93%E6%A9%9F%E5%88%B6/" title="從@Transactional看懂ACID：打造可靠的交易機制">從@Transactional看懂ACID：打造可靠的交易機制</a><time datetime="2025-04-28T05:30:29.000Z" title="發表於 2025-04-28 13:30:29">2025-04-28</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(to top,  rgba(5, 20, 40, 0.8), rgba(15, 50, 70, 0.6),rgba(10, 5, 20,0.2));;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By QuL</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日夜模式切換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到頂端"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="✧*｡٩(ˊᗜˋ*)و✧*｡,(´▽`ʃ♡ƪ)&quot;,٩(๑•̀ω•́๑)۶" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
