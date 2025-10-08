@@ -2,15 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.qulluq.com/link/index.html</loc>
-    
-    <lastmod>2025-10-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.qulluq.com/tags/index.html</loc>
     
     <lastmod>2025-10-08</lastmod>
@@ -20,16 +11,7 @@
   </url>
   
   <url>
-    <loc>https://blog.qulluq.com/categories/technical-notes/index.html</loc>
-    
-    <lastmod>2025-10-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qulluq.com/categories/qul-journal/index.html</loc>
+    <loc>https://blog.qulluq.com/link/index.html</loc>
     
     <lastmod>2025-10-08</lastmod>
     
@@ -92,7 +74,7 @@
   </url>
   
   <url>
-    <loc>https://blog.qulluq.com/elational-database-design-1/</loc>
+    <loc>https://blog.qulluq.com/categories/qul-journal/index.html</loc>
     
     <lastmod>2025-10-08</lastmod>
     
@@ -101,43 +83,7 @@
   </url>
   
   <url>
-    <loc>https://blog.qulluq.com/git-cherry-pick-commit/</loc>
-    
-    <lastmod>2025-10-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qulluq.com/git-cleanup-commit-history/</loc>
-    
-    <lastmod>2025-10-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qulluq.com/golang-tutorial-1-hello-world/</loc>
-    
-    <lastmod>2025-10-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qulluq.com/hexo-github-actions-blog-story/</loc>
-    
-    <lastmod>2025-10-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qulluq.com/hexo-tutorial-1-install-homebrew-nodejs/</loc>
+    <loc>https://blog.qulluq.com/categories/technical-notes/index.html</loc>
     
     <lastmod>2025-10-08</lastmod>
     
@@ -237,6 +183,60 @@
   
   <url>
     <loc>https://blog.qulluq.com/ssl-self-signed-certificate-fix/</loc>
+    
+    <lastmod>2025-10-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/elational-database-design-1/</loc>
+    
+    <lastmod>2025-10-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/git-cherry-pick-commit/</loc>
+    
+    <lastmod>2025-10-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/git-cleanup-commit-history/</loc>
+    
+    <lastmod>2025-10-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/golang-tutorial-1-hello-world/</loc>
+    
+    <lastmod>2025-10-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/hexo-github-actions-blog-story/</loc>
+    
+    <lastmod>2025-10-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/hexo-tutorial-1-install-homebrew-nodejs/</loc>
     
     <lastmod>2025-10-08</lastmod>
     
