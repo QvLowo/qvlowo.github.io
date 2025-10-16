@@ -1,243 +1,35 @@
-<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【專案紀錄】紀錄架server防火牆的坑 | QuL's Technical Blog</title><meta name="author" content="QuL"><meta name="copyright" content="QuL"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="紀錄開發新專案，配置新環境防火牆的坑">
-<meta property="og:type" content="article">
-<meta property="og:title" content="【專案紀錄】紀錄架server防火牆的坑">
-<meta property="og:url" content="https://blog.qulluq.com/server-firewall-setup-issues/index.html">
-<meta property="og:site_name" content="QuL&#39;s Technical Blog">
-<meta property="og:description" content="紀錄開發新專案，配置新環境防火牆的坑">
-<meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://blog.qulluq.com/img/author.png">
-<meta property="article:published_time" content="2025-03-03T06:43:09.000Z">
-<meta property="article:modified_time" content="2025-10-16T06:54:10.730Z">
-<meta property="article:author" content="QuL">
-<meta property="article:tag" content="Windows Server 2022">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://blog.qulluq.com/img/author.png"><script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "【專案紀錄】紀錄架server防火牆的坑",
-  "url": "https://blog.qulluq.com/server-firewall-setup-issues/",
-  "image": "https://blog.qulluq.com/img/author.png",
-  "datePublished": "2025-03-03T06:43:09.000Z",
-  "dateModified": "2025-10-16T06:54:10.730Z",
-  "author": [
-    {
-      "@type": "Person",
-      "name": "QuL",
-      "url": "https://blog.qulluq.com/about/"
-    }
-  ]
-}</script><link rel="shortcut icon" href="/img/icon.png"><link rel="canonical" href="https://blog.qulluq.com/server-firewall-setup-issues/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
-    (() => {
-      
-    const saveToLocal = {
-      set: (key, value, ttl) => {
-        if (!ttl) return
-        const expiry = Date.now() + ttl * 86400000
-        localStorage.setItem(key, JSON.stringify({ value, expiry }))
-      },
-      get: key => {
-        const itemStr = localStorage.getItem(key)
-        if (!itemStr) return undefined
-        const { value, expiry } = JSON.parse(itemStr)
-        if (Date.now() > expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return value
-      }
-    }
+extends includes/layout.pug
 
-    window.btf = {
-      saveToLocal,
-      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
-        script.onload = script.onreadystatechange = () => {
-          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
-        }
-        script.onerror = reject
-        document.head.appendChild(script)
-      }),
-      getCSS: (url, id) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onload = link.onreadystatechange = () => {
-          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
-        }
-        link.onerror = reject
-        document.head.appendChild(link)
-      }),
-      addGlobalFn: (key, fn, name = false, parent = window) => {
-        if (!false && key.startsWith('pjax')) return
-        const globalFn = parent.globalFn || {}
-        globalFn[key] = globalFn[key] || {}
-        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
-        parent.globalFn = globalFn
-      }
-    }
-  
-      
-      const activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      const activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
+block content
+  #post
+    if top_img === false
+      include includes/header/post-info.pug
 
-      btf.activateDarkMode = activateDarkMode
-      btf.activateLightMode = activateLightMode
+    article#article-container.container.post-content
+      if theme.noticeOutdate.enable && page.noticeOutdate !== false
+        include includes/post/outdate-notice.pug
+      else
+        !=page.content
+    include includes/post/post-copyright.pug
+    .tag_share
+      if (page.tags.length > 0 && theme.post_meta.post.tags)
+        .post-meta__tag-list
+          each item, index in page.tags.data
+            a(href=url_for(item.path)).post-meta__tags #[=item.name]
+      include includes/third-party/share/index.pug
 
-      const theme = saveToLocal.get('theme')
-    
-          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
-        
-      
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
-      }
-    
-      
-    const detectApple = () => {
-      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-  
-    })()
-  </script><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9993516444363929"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
-  google_ad_client: 'ca-pub-9993516444363929',
-  enable_page_level_ads: 'true'
-});</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-LCHP5WKXZR"></script><script>window.dataLayer = window.dataLayer || []
-function gtag(){dataLayer.push(arguments)}
-gtag('js', new Date())
-gtag('config', 'G-LCHP5WKXZR')
-btf.addGlobalFn('pjaxComplete', () => {
-  gtag('config', 'G-LCHP5WKXZR', {'page_path': window.location.pathname})
-}, 'google_analytics')
-</script><script>const GLOBAL_CONFIG = {
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
-  copy: {
-    success: '複製成功',
-    error: '複製失敗',
-    noSupport: '瀏覽器不支援'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  dateSuffix: {
-    just: '剛剛',
-    min: '分鐘前',
-    hour: '小時前',
-    day: '天前',
-    month: '個月前'
-  },
-  copyright: undefined,
-  lightbox: 'null',
-  Snackbar: undefined,
-  infinitegrid: {
-    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
-    buttonText: '載入更多'
-  },
-  isPhotoFigcaption: false,
-  islazyloadPlugin: false,
-  isAnchor: false,
-  percent: {
-    toc: true,
-    rightside: true,
-  },
-  autoDarkmode: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: '【專案紀錄】紀錄架server防火牆的坑',
-  isHighlightShrink: false,
-  isToc: true,
-  pageType: 'post'
-}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background: linear-gradient(to top, rgb(5, 20, 40), rgb(15, 50, 70), rgb(40, 100, 90), rgb(10, 5, 20));;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/author.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> categories</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/technical-notes/"><span> 技術筆記</span></a></li><li><a class="site-page child" href="/categories/development-practice/"><span> 開發實戰</span></a></li><li><a class="site-page child" href="/categories/learning-guides/"><span> 教學系列</span></a></li><li><a class="site-page child" href="/categories/qul-journal/"><span> QuL聊聊</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/img/background.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/qul_icon.png" alt="Logo"><span class="site-name">QuL's Technical Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">【專案紀錄】紀錄架server防火牆的坑</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首頁</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> categories</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/technical-notes/"><span> 技術筆記</span></a></li><li><a class="site-page child" href="/categories/development-practice/"><span> 開發實戰</span></a></li><li><a class="site-page child" href="/categories/learning-guides/"><span> 教學系列</span></a></li><li><a class="site-page child" href="/categories/qul-journal/"><span> QuL聊聊</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">【專案紀錄】紀錄架server防火牆的坑</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2025-03-03T06:43:09.000Z" title="發表於 2025-03-03 14:43:09">2025-03-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2025-10-16T06:54:10.730Z" title="更新於 2025-10-16 14:54:10">2025-10-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/development-practice/">development-practice</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">總字數:</span><span class="word-count">1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀時間:</span><span>3分鐘</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">瀏覽量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在公司開發新專案過程中，需要部署程式碼到新的Server上，申請一台新的Server，基本上完全沒東西，要自己裝java、maven、database等等</p>
-<p>那這邊記錄一下，安裝完畢server防火牆有開啟輸入輸出，一樣被防火牆擋的問題。</p>
-<hr>
-<h1 id="開啟防火牆port"><a href="#開啟防火牆port" class="headerlink" title="開啟防火牆port"></a>開啟防火牆port</h1><p>不論server的環境是Linux還是Windows，<br>新環境都要開防火牆port通過規則才可以讓本地的開發電腦連線，例如：在啟動springboot時會連不到。</p>
-<p>這邊拿 <strong>MySQL的預設port 3306</strong>舉例:</p>
-<h2 id="windows的指令寫法"><a href="#windows的指令寫法" class="headerlink" title="windows的指令寫法"></a>windows的指令寫法</h2><p>開啟<code>powershell管理員模式</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">New-NetFirewallRule -DisplayName &quot;MySQL 3306&quot; -Protocol TCP -LocalPort 3306 -Direction Inbound -Action Allow</span><br></pre></td></tr></table></figure>
-<h3 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h3><blockquote>
-<p>New-NetFirewallRule: 建立新的防火牆規則<br>-DisplayName: 自定義的名稱</p>
-</blockquote>
-<blockquote>
-<p>-Protocol: 通訊協定<br>(如:TCP&#x2F;UDP)</p>
-</blockquote>
-<blockquote>
-<p>-LocalPort: 要監聽的port</p>
-</blockquote>
-<blockquote>
-<p>-Direction: 流量方向<br>輸入or輸出(Inbound&#x2F;Outbound)</p>
-</blockquote>
-<blockquote>
-<p>-Action: 防火牆動作<br>允許或擋掉(Allow&#x2F;Block)</p>
-</blockquote>
-<hr>
-<h2 id="Linux的指令寫法"><a href="#Linux的指令寫法" class="headerlink" title="Linux的指令寫法"></a>Linux的指令寫法</h2><p>AlimaLinux版本:</p>
-<blockquote>
-<p>建立新的防火牆規則</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --permanent --add-port=3306/tcp</span><br></pre></td></tr></table></figure>
-<p>permanent英文直翻是永久的意思，那這邊代表的是就算電腦重啟也會生效</p>
-<blockquote>
-<p>重新載入防火牆規則</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+    if theme.reward.enable && theme.reward.QR_code
+      !=partial('includes/post/reward', {}, {cache: true})
 
-<blockquote>
-<p>查看目前防火牆有開啟的port號清單</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --list-ports</span><br></pre></td></tr></table></figure>
+    //- ad
+    if theme.ad && theme.ad.post
+      .ads-wrap!=theme.ad.post
 
-<p><em>相比之下linux的寫法簡單直覺多了 555 QQ</em></p>
-<hr>
-<h1 id="檢查port是否有被監聽"><a href="#檢查port是否有被監聽" class="headerlink" title="檢查port是否有被監聽"></a>檢查port是否有被監聽</h1><p>基本上linux都沒啥太多問題，<br>windows就比較難搞(?)<br>所以以防萬一可以看一下port號是不是有在被監聽<br>前提是有先<strong>啟動</strong>應用程式(ex:mysql)</p>
-<p>windows指令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -an |findstr :3306</span><br></pre></td></tr></table></figure>
+    if theme.post_pagination
+      include includes/pagination.pug
+    if theme.related_post && theme.related_post.enable
+      != related_posts(page,site.posts)
 
-<p>會長像這樣，最後面有LISTENING，代表電腦這邊是ok的</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TCP    0.0.0.0:3306          0.0.0.0:0              LISTENING</span><br></pre></td></tr></table></figure>
-<p>那就可以透過本地電腦來連線看看<br>基本上都會正常</p>
-<hr>
-<h1 id="補充：跨網段防火牆的坑"><a href="#補充：跨網段防火牆的坑" class="headerlink" title="補充：跨網段防火牆的坑"></a>補充：跨網段防火牆的坑</h1><p>但是!!<br>總是會有一些奇奇怪怪的事<br>我真正要紀錄踩的坑是這樣的…</p>
-<p>公司的網段有防火牆保護政策<br>跨網段連線需要先申請<br>但是這個坑是我申請跨網段連線，但是沒有生效的情況<br>嘿對 其實就是公司負責網路的沒有開某個port號<br>要怎麼測試很簡單</p>
-<p>有些學習到的小知識，日常開發可能不是那麼必要，但某天可以拿來應用，我覺得蠻棒的OwOb<br><strong>不同網段的網路會擋，需要路由器轉發</strong><br><strong>同網段之間的網路不會擋，因為不需要路由器轉發</strong></p>
-<p>這個拿生活中的例子講：</p>
-<ul>
-<li><p>不同網段 就像不同地址<br>你要寄包裹要透過物流分發寄出</p>
-</li>
-<li><p>同網段就像是 同個社區<br>你要拿包裹給隔壁鄰居可以直接按電鈴給他包裹(不要亂試會被抓走(????))</p>
-</li>
-</ul>
-<p>那這邊我就利用ssh測試<br>假設<br>目標server A（你放mysql的那台)是 192.168.1.xxx<br>本地電腦 server B 是 192.168.2.xxx<br>這樣A和B是跨網段<br>假設我有一台可以連過去的server C 是192.168.1.xxx<br>A和C是同網段</p>
-<p>拿springboot 8080 port來舉例<br>假設 A server有一支 api 是GET方法 :<br><code>http://192.168.1.xxx:8080/test</code> </p>
-<p>我用本地 B server 打</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET http://192.168.1.xxx:8080/test</span><br></pre></td></tr></table></figure>
-<p>沒有任何東西 &#x3D;可能被擋</p>
-<p>那用 C server 同網段再發一次</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET http://192.168.1.xxx:8080/test</span><br></pre></td></tr></table></figure>
-<p>有得到回應</p>
-<p>那就代表 A和B的網段之間的防火牆是沒有被打開的，這就跟server電腦上的防火牆沒關係了，而是和網路的防火牆有關係。</p>
-<h1 id="就是要連上但公司不給連怎辦？-搬出nginx轉發（？）"><a href="#就是要連上但公司不給連怎辦？-搬出nginx轉發（？）" class="headerlink" title="就是要連上但公司不給連怎辦？ 搬出nginx轉發（？）"></a>就是要連上但公司不給連怎辦？ 搬出nginx轉發（？）</h1><p>那因為公司可能會有資安政策考量的因素所以不給開那個port號，<br>後來查到可以透過nginx做反向代理作轉發的動作。</p>
-<p>案例是 公司給開80 不給開8080，<br>那我透過nginx轉發，就可以變成是打80port nginx幫我轉發給8080port，就會成功拿到回應。</p>
-<p>這樣寫一寫看起來跟路由器好像，那nginx配置相關的之後再紀錄…</p>
-<div id="post-outdate-notice" data="{&quot;limitDay&quot;:365,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2025-10-16 14:54:10&quot;}" hidden></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.qulluq.com/about/">QuL</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="https://blog.qulluq.com/server-firewall-setup-issues/">https://blog.qulluq.com/server-firewall-setup-issues/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 授權協議。轉載請註明來源 <a href="https://blog.qulluq.com" target="_blank">QuL's Technical Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Windows-Server-2022/">Windows Server 2022</a></div><div class="post-share"><div class="social-share" data-image="/img/author.png" data-sites="facebook,twitter,linkedin"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/springboot3-redis-noauth-error/" title="【redis】SpringBoot3 使用redis出現NOAUTH Authentication required.的錯誤"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">【redis】SpringBoot3 使用redis出現NOAUTH Authentication required.的錯誤</div></div><div class="info-2"><div class="info-item-1">紀錄SpringBoot在配置redis出現錯誤的解決方式</div></div></div></a><a class="pagination-related" href="/swagger-ui-version-issues/" title="【Swagger-ui】紀錄Swagger-ui版本的坑"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">【Swagger-ui】紀錄Swagger-ui版本的坑</div></div><div class="info-2"><div class="info-item-1">紀錄SpringBoot使用Swagger版本不兼容的問題</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/author.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">QuL</div><div class="author-info-description">一隻幽靈的技術筆記</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/QvLowo"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">第423天...</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%96%8B%E5%95%9F%E9%98%B2%E7%81%AB%E7%89%86port"><span class="toc-number">2.</span> <span class="toc-text">開啟防火牆port</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#windows%E7%9A%84%E6%8C%87%E4%BB%A4%E5%AF%AB%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">windows的指令寫法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AA%AA%E6%98%8E"><span class="toc-number">2.1.1.</span> <span class="toc-text">說明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E7%9A%84%E6%8C%87%E4%BB%A4%E5%AF%AB%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">Linux的指令寫法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AA%A2%E6%9F%A5port%E6%98%AF%E5%90%A6%E6%9C%89%E8%A2%AB%E7%9B%A3%E8%81%BD"><span class="toc-number">3.</span> <span class="toc-text">檢查port是否有被監聽</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A3%9C%E5%85%85%EF%BC%9A%E8%B7%A8%E7%B6%B2%E6%AE%B5%E9%98%B2%E7%81%AB%E7%89%86%E7%9A%84%E5%9D%91"><span class="toc-number">4.</span> <span class="toc-text">補充：跨網段防火牆的坑</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%B1%E6%98%AF%E8%A6%81%E9%80%A3%E4%B8%8A%E4%BD%86%E5%85%AC%E5%8F%B8%E4%B8%8D%E7%B5%A6%E9%80%A3%E6%80%8E%E8%BE%A6%EF%BC%9F-%E6%90%AC%E5%87%BAnginx%E8%BD%89%E7%99%BC%EF%BC%88%EF%BC%9F%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">就是要連上但公司不給連怎辦？ 搬出nginx轉發（？）</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/hexo-tutorial-4-github-actions-deploy/" title="Hexo Blog教學(四)：GitHub Actions自動部署教學從手動到全自動的完整流程">Hexo Blog教學(四)：GitHub Actions自動部署教學從手動到全自動的完整流程</a><time datetime="2025-10-16T06:01:30.000Z" title="發表於 2025-10-16 14:01:30">2025-10-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/ssl-self-signed-certificate-fix/" title="弱掃修補實戰:一次搞懂SSL自我簽署憑證(SSL Self-Signed Certificate)的安全風險與解決方案">弱掃修補實戰:一次搞懂SSL自我簽署憑證(SSL Self-Signed Certificate)的安全風險與解決方案</a><time datetime="2025-09-16T05:18:30.000Z" title="發表於 2025-09-16 13:18:30">2025-09-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/golang-tutorial-1-hello-world/" title="Golang入門教學(一)：為什麼要學Go？從Hello World到你的第一個可執行檔">Golang入門教學(一)：為什麼要學Go？從Hello World到你的第一個可執行檔</a><time datetime="2025-09-03T08:12:07.000Z" title="發表於 2025-09-03 16:12:07">2025-09-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/transactional-acid-transaction-management/" title="從@Transactional看懂ACID：打造可靠的交易機制">從@Transactional看懂ACID：打造可靠的交易機制</a><time datetime="2025-04-28T05:30:29.000Z" title="發表於 2025-04-28 13:30:29">2025-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/maven-package-error/" title="【Maven】打包SpringBoot專案啟動jar檔異常紀錄">【Maven】打包SpringBoot專案啟動jar檔異常紀錄</a><time datetime="2025-03-14T03:15:07.000Z" title="發表於 2025-03-14 11:15:07">2025-03-14</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(to top,  rgba(5, 20, 40, 0.8), rgba(15, 50, 70, 0.6),rgba(10, 5, 20,0.2));;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By QuL</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日夜模式切換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到頂端"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="✧*｡٩(ˊᗜˋ*)و✧*｡,(´▽`ʃ♡ƪ)&quot;,٩(๑•̀ω•́๑)۶" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+    if page.comments !== false && theme.comments.use
+      - var commentsJsLoad = true
+      !=partial('includes/third-party/comments/index', {}, {cache: true})
