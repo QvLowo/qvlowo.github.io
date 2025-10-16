@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /page/
+Disallow: /archives/
+Allow: /
+Sitemap: https://blog.qulluq.com/sitemap.xml
