@@ -20,6 +20,33 @@
   </url>
   
   <url>
+    <loc>https://blog.qulluq.com/swagger-ui-version-issues/</loc>
+    
+    <lastmod>2025-10-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/transactional-acid-transaction-management/</loc>
+    
+    <lastmod>2025-10-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/about/index.html</loc>
+    
+    <lastmod>2025-10-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.qulluq.com/categories/index.html</loc>
     
     <lastmod>2025-10-16</lastmod>
@@ -57,42 +84,6 @@
   
   <url>
     <loc>https://blog.qulluq.com/categories/technical-notes/index.html</loc>
-    
-    <lastmod>2025-10-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qulluq.com/swagger-ui-version-issues/</loc>
-    
-    <lastmod>2025-10-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qulluq.com/transactional-acid-transaction-management/</loc>
-    
-    <lastmod>2025-10-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qulluq.com/about/index.html</loc>
-    
-    <lastmod>2025-10-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qulluq.com/ssl-self-signed-certificate-fix/</loc>
     
     <lastmod>2025-10-16</lastmod>
     
@@ -164,6 +155,33 @@
   </url>
   
   <url>
+    <loc>https://blog.qulluq.com/ssl-self-signed-certificate-fix/</loc>
+    
+    <lastmod>2025-10-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/elational-database-design-1/</loc>
+    
+    <lastmod>2025-10-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/git-cherry-pick-commit/</loc>
+    
+    <lastmod>2025-10-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.qulluq.com/git-cleanup-commit-history/</loc>
     
     <lastmod>2025-10-16</lastmod>
@@ -173,7 +191,7 @@
   </url>
   
   <url>
-    <loc>https://blog.qulluq.com/golang-tutorial-1-hello-world/</loc>
+    <loc>https://blog.qulluq.com/hexo-github-actions-blog-story/</loc>
     
     <lastmod>2025-10-16</lastmod>
     
@@ -182,7 +200,7 @@
   </url>
   
   <url>
-    <loc>https://blog.qulluq.com/hexo-github-actions-blog-story/</loc>
+    <loc>https://blog.qulluq.com/golang-tutorial-1-hello-world/</loc>
     
     <lastmod>2025-10-16</lastmod>
     
@@ -226,24 +244,6 @@
     <priority>0.6</priority>
   </url>
   
-  <url>
-    <loc>https://blog.qulluq.com/elational-database-design-1/</loc>
-    
-    <lastmod>2025-10-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qulluq.com/git-cherry-pick-commit/</loc>
-    
-    <lastmod>2025-10-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
 
   <url>
     <loc>https://blog.qulluq.com/</loc>
@@ -262,6 +262,20 @@
   
   <url>
     <loc>https://blog.qulluq.com/tags/Git/</loc>
+    <lastmod>2025-10-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/tags/Hexo/</loc>
+    <lastmod>2025-10-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/tags/Github-Action/</loc>
     <lastmod>2025-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -290,20 +304,6 @@
   
   <url>
     <loc>https://blog.qulluq.com/tags/Hello-World/</loc>
-    <lastmod>2025-10-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qulluq.com/tags/Hexo/</loc>
-    <lastmod>2025-10-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qulluq.com/tags/Github-Action/</loc>
     <lastmod>2025-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
