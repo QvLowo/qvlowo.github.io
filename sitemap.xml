@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.qulluq.com/link/index.html</loc>
+    <loc>https://blog.qulluq.com/tags/index.html</loc>
     
     <lastmod>2025-10-16</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://blog.qulluq.com/tags/index.html</loc>
+    <loc>https://blog.qulluq.com/link/index.html</loc>
     
     <lastmod>2025-10-16</lastmod>
     
@@ -65,15 +65,6 @@
   </url>
   
   <url>
-    <loc>https://blog.qulluq.com/categories/learning-guides/index.html</loc>
-    
-    <lastmod>2025-10-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.qulluq.com/categories/qul-journal/index.html</loc>
     
     <lastmod>2025-10-16</lastmod>
@@ -83,7 +74,25 @@
   </url>
   
   <url>
+    <loc>https://blog.qulluq.com/categories/learning-guides/index.html</loc>
+    
+    <lastmod>2025-10-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.qulluq.com/categories/technical-notes/index.html</loc>
+    
+    <lastmod>2025-10-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/ssl-self-signed-certificate-fix/</loc>
     
     <lastmod>2025-10-16</lastmod>
     
@@ -155,7 +164,7 @@
   </url>
   
   <url>
-    <loc>https://blog.qulluq.com/ssl-self-signed-certificate-fix/</loc>
+    <loc>https://blog.qulluq.com/hexo-tutorial-4-github-actions-deploy/</loc>
     
     <lastmod>2025-10-16</lastmod>
     
@@ -228,15 +237,6 @@
   
   <url>
     <loc>https://blog.qulluq.com/hexo-tutorial-3-manual-deploy-github-pages/</loc>
-    
-    <lastmod>2025-10-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qulluq.com/hexo-tutorial-4-github-actions-deploy/</loc>
     
     <lastmod>2025-10-16</lastmod>
     
