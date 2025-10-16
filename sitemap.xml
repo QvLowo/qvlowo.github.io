@@ -20,33 +20,6 @@
   </url>
   
   <url>
-    <loc>https://blog.qulluq.com/swagger-ui-version-issues/</loc>
-    
-    <lastmod>2025-10-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qulluq.com/transactional-acid-transaction-management/</loc>
-    
-    <lastmod>2025-10-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qulluq.com/about/index.html</loc>
-    
-    <lastmod>2025-10-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.qulluq.com/categories/index.html</loc>
     
     <lastmod>2025-10-16</lastmod>
@@ -84,6 +57,33 @@
   
   <url>
     <loc>https://blog.qulluq.com/categories/technical-notes/index.html</loc>
+    
+    <lastmod>2025-10-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/swagger-ui-version-issues/</loc>
+    
+    <lastmod>2025-10-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/transactional-acid-transaction-management/</loc>
+    
+    <lastmod>2025-10-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/about/index.html</loc>
     
     <lastmod>2025-10-16</lastmod>
     
@@ -137,7 +137,7 @@
   </url>
   
   <url>
-    <loc>https://blog.qulluq.com/server-firewall-setup-issues/</loc>
+    <loc>https://blog.qulluq.com/springboot3-redis-noauth-error/</loc>
     
     <lastmod>2025-10-16</lastmod>
     
@@ -146,7 +146,7 @@
   </url>
   
   <url>
-    <loc>https://blog.qulluq.com/springboot3-redis-noauth-error/</loc>
+    <loc>https://blog.qulluq.com/server-firewall-setup-issues/</loc>
     
     <lastmod>2025-10-16</lastmod>
     
@@ -173,7 +173,7 @@
   </url>
   
   <url>
-    <loc>https://blog.qulluq.com/git-cherry-pick-commit/</loc>
+    <loc>https://blog.qulluq.com/git-cleanup-commit-history/</loc>
     
     <lastmod>2025-10-16</lastmod>
     
@@ -182,7 +182,7 @@
   </url>
   
   <url>
-    <loc>https://blog.qulluq.com/git-cleanup-commit-history/</loc>
+    <loc>https://blog.qulluq.com/git-cherry-pick-commit/</loc>
     
     <lastmod>2025-10-16</lastmod>
     
@@ -415,6 +415,13 @@
   </url>
   
   <url>
+    <loc>https://blog.qulluq.com/tags/Redis/</loc>
+    <lastmod>2025-10-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.qulluq.com/tags/Windows-Server-2022/</loc>
     <lastmod>2025-10-16</lastmod>
     <changefreq>weekly</changefreq>
@@ -437,13 +444,6 @@
   
   <url>
     <loc>https://blog.qulluq.com/tags/Nginx/</loc>
-    <lastmod>2025-10-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qulluq.com/tags/Redis/</loc>
     <lastmod>2025-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
