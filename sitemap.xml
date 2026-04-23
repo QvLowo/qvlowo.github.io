@@ -2,15 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.qulluq.com/link/index.html</loc>
-    
-    <lastmod>2026-04-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.qulluq.com/tags/index.html</loc>
     
     <lastmod>2026-04-23</lastmod>
@@ -20,25 +11,7 @@
   </url>
   
   <url>
-    <loc>https://blog.qulluq.com/swagger-ui-version-issues/</loc>
-    
-    <lastmod>2026-04-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qulluq.com/transactional-acid-transaction-management/</loc>
-    
-    <lastmod>2026-04-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qulluq.com/about/index.html</loc>
+    <loc>https://blog.qulluq.com/link/index.html</loc>
     
     <lastmod>2026-04-23</lastmod>
     
@@ -84,6 +57,33 @@
   
   <url>
     <loc>https://blog.qulluq.com/categories/technical-notes/index.html</loc>
+    
+    <lastmod>2026-04-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/swagger-ui-version-issues/</loc>
+    
+    <lastmod>2026-04-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/transactional-acid-transaction-management/</loc>
+    
+    <lastmod>2026-04-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/about/index.html</loc>
     
     <lastmod>2026-04-23</lastmod>
     
@@ -164,6 +164,15 @@
   </url>
   
   <url>
+    <loc>https://blog.qulluq.com/elational-database-design-1/</loc>
+    
+    <lastmod>2026-04-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.qulluq.com/git-cherry-pick-commit/</loc>
     
     <lastmod>2026-04-23</lastmod>
@@ -219,15 +228,6 @@
   
   <url>
     <loc>https://blog.qulluq.com/hexo-tutorial-4-github-actions-deploy/</loc>
-    
-    <lastmod>2026-04-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qulluq.com/elational-database-design-1/</loc>
     
     <lastmod>2026-04-23</lastmod>
     
@@ -413,13 +413,6 @@
   </url>
   
   <url>
-    <loc>https://blog.qulluq.com/tags/Swagger/</loc>
-    <lastmod>2026-04-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.qulluq.com/tags/SSL/</loc>
     <lastmod>2026-04-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -484,6 +477,13 @@
   
   <url>
     <loc>https://blog.qulluq.com/tags/MS-SQL/</loc>
+    <lastmod>2026-04-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/tags/Swagger/</loc>
     <lastmod>2026-04-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
