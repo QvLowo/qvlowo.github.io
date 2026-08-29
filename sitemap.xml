@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.qulluq.com/tags/index.html</loc>
+    <loc>https://blog.qulluq.com/link/index.html</loc>
     
     <lastmod>2026-08-29</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://blog.qulluq.com/link/index.html</loc>
+    <loc>https://blog.qulluq.com/tags/index.html</loc>
     
     <lastmod>2026-08-29</lastmod>
     
@@ -29,7 +29,7 @@
   </url>
   
   <url>
-    <loc>https://blog.qulluq.com/categories/development-practice/index.html</loc>
+    <loc>https://blog.qulluq.com/categories/learning-guides/index.html</loc>
     
     <lastmod>2026-08-29</lastmod>
     
@@ -38,7 +38,7 @@
   </url>
   
   <url>
-    <loc>https://blog.qulluq.com/categories/learning-guides/index.html</loc>
+    <loc>https://blog.qulluq.com/categories/development-practice/index.html</loc>
     
     <lastmod>2026-08-29</lastmod>
     
@@ -84,6 +84,24 @@
   
   <url>
     <loc>https://blog.qulluq.com/about/index.html</loc>
+    
+    <lastmod>2026-08-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/springboot3-redis-noauth-error/</loc>
+    
+    <lastmod>2026-08-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qulluq.com/ssl-self-signed-certificate-fix/</loc>
     
     <lastmod>2026-08-29</lastmod>
     
@@ -138,24 +156,6 @@
   
   <url>
     <loc>https://blog.qulluq.com/server-firewall-setup-issues/</loc>
-    
-    <lastmod>2026-08-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qulluq.com/springboot3-redis-noauth-error/</loc>
-    
-    <lastmod>2026-08-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qulluq.com/ssl-self-signed-certificate-fix/</loc>
     
     <lastmod>2026-08-29</lastmod>
     
